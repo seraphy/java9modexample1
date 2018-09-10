@@ -19,8 +19,25 @@ java.xml.bindをrequiresしている.
 
 ## 実行方法
 
-- build.cmd でモジュールごとにビルドを行う.
-- run.cmd でビルドされたモジュールを実行する.
+```cmd
+mvn clean package
+```
+で、 ```app\targets\mods``` 下に ビルドしたjarモジュールと依存jarを出力する。
 
-- pacage.cmd でビルドされたモジュールを、モジュールごとにjarファイルにまとめる.
-- runPackage.cmd でjarに格納されたモジュールを参照してモジュールを実行する.
+これを
+java9, 10 で以下のように実行する。
+
+```cmd
+java --module-path app\target\mods -m jp.seraphyware.java9example1app/jp.seraphyware.java9example1app.Main
+```
+
+## build.cmdとsetenv.cmdについて
+
+```setenv.cmd``` で ```JAVA_HOME``` と ```MAVEN_HOME``` を設定して、
+```build.cmd``` を実行することにより、上記の ```mvn``` と ```java``` の実行を行う。
+
+
+## 既知の問題
+
+現時点(2018/09/10)では、
+Java11(rc版 build 11-ea+20)ではモジュールのレゾリューション(java.activationまわり)に失敗して動作しない。
