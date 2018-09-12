@@ -37,7 +37,29 @@ java --module-path app\target\mods -m jp.seraphyware.java9example1app/jp.seraphy
 ```build.cmd``` を実行することにより、上記の ```mvn``` と ```java``` の実行を行う。
 
 
-## 既知の問題
+## 注意点
 
-現時点(2018/09/10)では、
-Java11(rc版 build 11-ea+20)ではモジュールのレゾリューション(java.activationまわり)に失敗して動作しない。
+Java11(rc版 build 11-ea+20)ではモジュールのレゾリューションが、より厳格となっているようである。
+
+JAXBを動作させるためには、以下のモジュールをインポートすれば良い。
+
+- javax.xml.bind:jaxb-api:2.3.0
+- com.sun.xml.bind:jaxb-core:2.3.0
+- com.sun.activation:javax.activation:1.2.0
+
+以下は上記モジュール内に含まれるパッケージを重複してエクスポートするものとしてresolutionに失敗するため、**含めてはならない**。
+
+- com.sun.xml.bind:jaxb-impl:2.3.0
+- javax.xml.bind:activation:1.0.2
+
+
+これらを含めると、java11では実行時に以下のようなエラーになる。
+
+```
+java.lang.module.ResolutionException: Modules java.activation and activation export package com.sun.activation.registries to module java.xml.bind
+```
+
+※ 2つのモジュール（java.activationとactivation-b）に同じパッケージ（com.sun.activation.registries）が含まれていることを示す。
+(どちらか一方を削除する必要がある。)
+
+

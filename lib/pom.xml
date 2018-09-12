@@ -36,22 +36,27 @@
             <artifactId>jaxb-core</artifactId>
             <version>2.3.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl -->
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.xml.bind/activation -->
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>activation</artifactId>
-            <version>1.0.2</version>
-        </dependency>
         <dependency>
             <groupId>com.sun.activation</groupId>
             <artifactId>javax.activation</artifactId>
             <version>1.2.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl
+        *** 不要 jaxb-coreで内包されるため重複エクスポートとなる ***
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+         -->
+        <!-- https://mvnrepository.com/artifact/javax.xml.bind/activation
+        *** 不要 javax.activationで内包されるため重複エクスポートとなる ***
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+         -->
     </dependencies>
 </project>
