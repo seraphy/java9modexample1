@@ -1,16 +1,21 @@
 package jp.seraphyware.java9example1app;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+
 import jp.seraphyware.java9example1lib.Lib;
 
 public class Main {
-	
+
 	public static void main(String... args) throws Exception {
+		Logger logger = System.getLogger(Main.class.getName());
+
 		Lib lib = Lib.getDefault();
-		System.out.println(lib.describe("hello, world"));
+		logger.log(Level.INFO, lib.describe("hello, world"));
 
-		//Lib lib2 = new jp.seraphyware.java9example1lib.priv.LibImpl();
-		//System.out.println(lib2.describe("hello, world"));
+//		Lib lib2 = new jp.seraphyware.java9example1lib.priv.LibImpl();
+//		logger.log(Level.INFO, lib2.describe("hello, world"));
 
-		System.out.println("実行を完了しました。");
+		logger.log(Level.INFO, "実行を完了しました。");
 	}
 }
