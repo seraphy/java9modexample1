@@ -63,3 +63,26 @@ java.lang.module.ResolutionException: Modules java.activation and activation exp
 (どちらか一方を削除する必要がある。)
 
 
+## モジュールのメインクラスとバージョン属性の指定
+
+現時点(maven-jar-plugin:3.1.0)では、module-info.javaに対する、module-main-class, module-version属性を付与することができないので、
+java9以降のjarコマンドを直接使用して属性を更新させている。
+
+pom.xml では ```maven-antrun-plugin``` を使って ```jar```　コマンドを呼び出している。
+
+これにより
+
+```shell
+java -p app\target\mods -m jp.seraphyware.java9example1app
+```
+
+のように、モジュール名を指定するだけでメインクラスを実行できるようになる。
+
+また、これらの属性情報は、
+
+```shell
+jar --describe-module --file=app\target\mods\java9moduleexampleapp-1.0-SNAPSHOT.jar
+```
+
+で確認することができる。
+
